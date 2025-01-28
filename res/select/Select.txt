@@ -1,0 +1,4 @@
+teams.student.TsarBomba.TsarBomba
+100
+teams.mal.zeus.Zeus
+100
