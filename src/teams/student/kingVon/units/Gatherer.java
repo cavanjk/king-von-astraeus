@@ -45,9 +45,8 @@ public class Gatherer extends KingVonUnit
 		if(hasCapacity())
 		{
 			Resource r = getNearestResource();
-
-			// Try and collect the nearest resource
-			if(r != null) {
+			if(r != null)
+			{
 				moveTo(r);
 				((Collector) getWeaponOne()).use(r);
 			}

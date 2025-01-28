@@ -28,7 +28,8 @@ public class Miner extends KingVonUnit
 
 	public void action() 
 	{
-		harvest(getNearestNode(), getWeaponOne());
+		harvest(unifiedNode, getWeaponOne());
+		updateUnifiedNode(getNearestNode());
 	}
 
 	public void harvest(Node n, Weapon w)
@@ -38,7 +39,6 @@ public class Miner extends KingVonUnit
 		{
 			moveTo(n);
 		}
-		
 		// Back up if I'm close to my minimum range
 		else if(getDistance(n) < w.getMinRange() * 1.5f)
 		{
@@ -46,7 +46,6 @@ public class Miner extends KingVonUnit
 			turnAround();
 			move();
 		}
-				
 		w.use(n);
 	}
 	
