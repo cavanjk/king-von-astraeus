@@ -1,21 +1,20 @@
-package teams.student.myTeam;
+package teams.student.kingVon;
 
 import components.weapon.Weapon;
-import engine.states.Game;
 import objects.entity.unit.Unit;
 import org.newdawn.slick.Graphics;
 import player.Player;
 
-public abstract class MyTeamUnit extends Unit 
+public abstract class KingVonUnit extends Unit
 {	
-	public MyTeamUnit(Player p)  
+	public KingVonUnit(Player p)
 	{
 		super(p);
 	}
 	
-	public MyTeam getPlayer()
+	public KingVon getPlayer()
 	{
-		return (MyTeam) super.getPlayer();
+		return (KingVon) super.getPlayer();
 	}
 	
 	public void action() 

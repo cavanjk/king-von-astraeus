@@ -1,12 +1,12 @@
-package teams.student.myTeam;
+package teams.student.kingVon;
 
 import org.newdawn.slick.Graphics;
 import player.Player;
-import teams.student.myTeam.units.Fighter;
-import teams.student.myTeam.units.Gatherer;
-import teams.student.myTeam.units.Miner;
+import teams.student.kingVon.units.Fighter;
+import teams.student.kingVon.units.Gatherer;
+import teams.student.kingVon.units.Miner;
 
-public class MyTeam extends Player
+public class KingVon extends Player
 {	
 	public void setup()
 	{		

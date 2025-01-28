@@ -1,4 +1,4 @@
-package teams.student.myTeam.units;
+package teams.student.kingVon.units;
 
 import components.upgrade.Plating;
 import components.upgrade.Shield;
@@ -7,13 +7,13 @@ import components.weapon.kinetic.Autocannon;
 import objects.entity.unit.Frame;
 import objects.entity.unit.Model;
 import objects.entity.unit.Style;
-import teams.student.myTeam.MyTeam;
-import teams.student.myTeam.MyTeamUnit;
+import teams.student.kingVon.KingVon;
+import teams.student.kingVon.KingVonUnit;
 
-public class Fighter extends MyTeamUnit
+public class Fighter extends KingVonUnit
 {
 	
-	public Fighter(MyTeam p)
+	public Fighter(KingVon p)
 	{
 		super(p);
 	}

@@ -1,4 +1,4 @@
-package teams.student.myTeam.units;
+package teams.student.kingVon.units;
 
 
 import components.weapon.Weapon;
@@ -7,13 +7,13 @@ import objects.entity.node.Node;
 import objects.entity.unit.Frame;
 import objects.entity.unit.Model;
 import objects.entity.unit.Style;
-import teams.student.myTeam.MyTeam;
-import teams.student.myTeam.MyTeamUnit;
+import teams.student.kingVon.KingVon;
+import teams.student.kingVon.KingVonUnit;
 
-public class Miner extends MyTeamUnit
+public class Miner extends KingVonUnit
 {
 	
-	public Miner(MyTeam p)
+	public Miner(KingVon p)
 	{
 		super(p);
 	}

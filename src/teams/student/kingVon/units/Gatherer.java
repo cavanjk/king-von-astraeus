@@ -1,4 +1,4 @@
-package teams.student.myTeam.units;
+package teams.student.kingVon.units;
 
 
 import components.weapon.economy.Collector;
@@ -6,13 +6,13 @@ import objects.entity.unit.Frame;
 import objects.entity.unit.Model;
 import objects.entity.unit.Style;
 import objects.resource.Resource;
-import teams.student.myTeam.MyTeam;
-import teams.student.myTeam.MyTeamUnit;
+import teams.student.kingVon.KingVon;
+import teams.student.kingVon.KingVonUnit;
 
-public class Gatherer extends MyTeamUnit
+public class Gatherer extends KingVonUnit
 {
 
-	public Gatherer(MyTeam p)
+	public Gatherer(KingVon p)
 	{
 		super(p);
 	}
