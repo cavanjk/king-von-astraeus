@@ -1,4 +1,4 @@
-teams.student.myTeam.MyTeam
+teams.student.kingVon.KingVon
 100
-teams.foes.vanguard.TheVanguard
+teams.foes.dummy.Dummy
 100

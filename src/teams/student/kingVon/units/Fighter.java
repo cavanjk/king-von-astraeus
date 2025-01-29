@@ -18,9 +18,11 @@ public class Fighter extends KingVonUnit {
 	private boolean isInFormation = true;
 	private static final float DEFEND_RANGE = 1000f;
 	private static final float ORBIT_RADIUS = 500f;
+	int timer;
 
 	public Fighter(Player p) {
 		super(p);
+		timer = 0;
 	}
 
 	public void design() {
@@ -35,11 +37,17 @@ public class Fighter extends KingVonUnit {
 
 	public void action() {
 		Unit enemy = getNearestEnemy();
-		if (isInFormation) {
-			if (getPlayer().countMyUnits(Fighter.class) > 15) {
+		timer++;
+
+		if (isInFormation)
+		{
+			if (getPlayer().countMyUnits(Fighter.class) > 15)
+			{
 				isInFormation = false;
 
-			} else {
+			}
+			else
+			{
 				moveTo(getHomeBase());
 				if(enemy != null && getDistance(enemy) <= DEFEND_RANGE)
 				{
@@ -62,6 +70,8 @@ public class Fighter extends KingVonUnit {
 			}
 
 		}
+
+		moveTo(enemy);
 	}
 
 	@Override
@@ -105,5 +115,15 @@ public class Fighter extends KingVonUnit {
 			}
 		}
 		return lowestHealthUnit;
+	}
+
+
+	public void early()
+	{
+
+	}
+	public void mid()
+	{
+
 	}
 }

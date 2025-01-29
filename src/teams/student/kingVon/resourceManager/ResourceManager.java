@@ -9,21 +9,24 @@ import java.util.ArrayList;
 
 public class ResourceManager {
 
-    private final Player player;
-    private ArrayList<KingVonResource> resources;
+    private static KingVon player;
+    private static final ArrayList<KingVonResource> resources = new ArrayList<>();
 
-    public ResourceManager(Unit unit) {
-        player = unit.getPlayer();
-        resources = new ArrayList<>();
+    public static void initialize(KingVon player) {
+        ResourceManager.player = player;
     }
 
-    public void registerResources() {
+    public static void registerResources() {
+        if (player == null) {
+            throw new IllegalStateException("ResourceManager not initialized.");
+        }
+        resources.clear();
         for (Resource r : player.getAllResources()) {
             resources.add(new KingVonResource(r.getX(), r.getY(), player));
         }
     }
 
-    public ArrayList<KingVonResource> getResources() {
+    public static ArrayList<KingVonResource> getResources() {
         return resources;
     }
 }

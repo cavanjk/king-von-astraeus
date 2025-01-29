@@ -819,7 +819,7 @@ public abstract class Unit extends Entity implements Values
         return nearestResource;
     }
 
-    public final Resource getNearestResource()
+    public Resource getNearestResource()
     {
         if (Game.getResourceKDTree() != null) return Game.getResourceKDTree().nearest(this);
         return getNearestResource(Resource.class);
