@@ -19,6 +19,8 @@ public class KingVon extends Player
 		setColorPrimary(170, 170, 170);
 		setColorSecondary(200, 200, 50);
 		setColorAccent(255, 255, 255);
+
+
 	}
 	
 	public void strategy() 

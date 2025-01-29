@@ -13,13 +13,13 @@ public class ResourceManager {
     private ArrayList<KingVonResource> resources;
 
     public ResourceManager(Unit unit) {
-        this.player = unit.getPlayer();
+        player = unit.getPlayer();
         resources = new ArrayList<>();
     }
 
     public void registerResources() {
         for (Resource r : player.getAllResources()) {
-            resources.add(new KingVonResource(r.getX(), r.getY()));
+            resources.add(new KingVonResource(r.getX(), r.getY(), player));
         }
     }
 

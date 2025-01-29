@@ -1,4 +1,4 @@
-teams.student.TsarBomba.TsarBomba
+teams.student.myTeam.MyTeam
 100
-teams.mal.zeus.Zeus
+teams.foes.vanguard.TheVanguard
 100
