@@ -10,6 +10,8 @@ import player.Player;
 import teams.student.kingVon.resourceManager.ResourceManager;
 import teams.student.kingVon.units.*;
 
+import java.util.ArrayList;
+
 
 public class KingVon extends Player
 {
@@ -54,7 +56,9 @@ public class KingVon extends Player
 			}
 			else if (gathererPercent < 0.5)
 			{
-				buildUnit(new Gatherer(this));
+                Gatherer g = new Gatherer(this);
+				buildUnit(g);
+                ResourceManager.getGatherers().add(g);
 			}
 			else if (minerPercent < 0.25)
 			{
@@ -176,5 +180,4 @@ public class KingVon extends Player
 //		{
 //			buildUnit(new Fighter(this));
 //		}
-	
 }
