@@ -16,12 +16,14 @@ public class Gatherer extends KingVonUnit
 {
 	int timer;
 	private Resource target;
+ private AreayList<Resource> sortedReesources;
 
 	public Gatherer(KingVon p)
 	{
 		super(p);
 		timer = 0;
 		target = null;
+  sortedResources = ResourceManager.getSortedResources(getHomeBase());
 	}
 
 	public void design()
@@ -61,13 +63,14 @@ public class Gatherer extends KingVonUnit
 			}
 			moveTo(getHomeBase());
 			deposit();
+   sortedResources = ResourceManager.getSortedResources(this);
 		}
 	}
 
 	public void gatherResources() {
 		if (hasCapacity()) {
 			if (target == null || !doesResourceExist(target)) {
-				for (Resource r : ResourceManager.getSortedResources(getHomeBase())) {
+				for (Resource r : sortedResources) {
 					if (doesResourceExist(r) && !ResourceManager.getResourceGathererHashMap().getOrDefault(r, false)) {
 						ResourceManager.getResourceMap().put(r, this);
 						ResourceManager.getResourceGathererHashMap().put(r, true);
