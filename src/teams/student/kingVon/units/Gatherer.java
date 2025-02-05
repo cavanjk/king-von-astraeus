@@ -72,13 +72,14 @@ public class Gatherer extends KingVonUnit
 						ResourceManager.getResourceMap().put(r, this);
 						ResourceManager.getResourceGathererHashMap().put(r, true);
 						moveTo(r);
+						((Collector) getWeaponOne()).use(r);
 						target = r;
 						return;
 					}
-					((Collector) getWeaponOne()).use(r);
 				}
 			} else {
 				moveTo(target);
+				((Collector) getWeaponOne()).use(target);
 			}
 		}
 	}
