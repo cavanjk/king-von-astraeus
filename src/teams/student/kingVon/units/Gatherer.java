@@ -21,7 +21,6 @@ public class Gatherer extends KingVonUnit
 	{
 		super(p);
 		timer = 0;
-		boolean isGathering = false;
 		target = null;
 	}
 
@@ -54,45 +53,43 @@ public class Gatherer extends KingVonUnit
 		}
 	}
 
-	public void returnResources()
-	{
-		if(isFull())
-		{
+	public void returnResources() {
+		if (isFull()) {
+			if (target != null) {
+				ResourceManager.getResourceGathererHashMap().put(target, false);
+				target = null;
+			}
 			moveTo(getHomeBase());
 			deposit();
 		}
 	}
 
-	public void gatherResources()
-	{
-		if(hasCapacity())
-		{
-			Resource r = getNearestResource();
-			ResourceManager.getResources().add(r);
-			if(r != null) {
-				if (!isResourceBeingGathered(r)) {
-					ResourceManager.getResourceMap().put(r, this);
-					moveTo(r);
-					((Collector) getWeaponOne()).use(r);
-					if (getDistance(getHomeBase()) < 100 && getTarget() != null) {
-						ResourceManager.getResourceMap().remove(r, this);
+	public void gatherResources() {
+		if (hasCapacity()) {
+			if (target == null || !doesResourceExist(target)) {
+				for (Resource r : ResourceManager.getSortedResources(getHomeBase())) {
+					if (doesResourceExist(r) && !ResourceManager.getResourceGathererHashMap().getOrDefault(r, false)) {
+						ResourceManager.getResourceMap().put(r, this);
+						ResourceManager.getResourceGathererHashMap().put(r, true);
+						moveTo(r);
+						target = r;
+						return;
 					}
+					((Collector) getWeaponOne()).use(r);
 				}
+			} else {
+				moveTo(target);
 			}
 		}
 	}
 
 
-	private boolean isResourceBeingGathered(Resource r)
+
+
+
+	private boolean doesResourceExist(Resource r)
 	{
-		for (Gatherer gatherer : ResourceManager.getGatherers())
-		{
-			if (gatherer.getTarget() == r)
-			{
-				return true;
-			}
-		}
-		return false;
+		return objects.resource.ResourceManager.getResources().contains(r);
 	}
 
 	public Resource getTarget()
