@@ -7,7 +7,6 @@ import objects.entity.unit.Model;
 import objects.entity.unit.Style;
 import objects.entity.unit.Unit;
 import objects.resource.Resource;
-import org.lwjgl.Sys;
 import teams.student.kingVon.KingVon;
 import teams.student.kingVon.KingVonUnit;
 import teams.student.kingVon.resourceManager.ResourceManager;
@@ -16,14 +15,12 @@ public class Gatherer extends KingVonUnit
 {
 	int timer;
 	private Resource target;
- private AreayList<Resource> sortedReesources;
 
 	public Gatherer(KingVon p)
 	{
 		super(p);
 		timer = 0;
 		target = null;
-  sortedResources = ResourceManager.getSortedResources(getHomeBase());
 	}
 
 	public void design()
@@ -63,32 +60,61 @@ public class Gatherer extends KingVonUnit
 			}
 			moveTo(getHomeBase());
 			deposit();
-   sortedResources = ResourceManager.getSortedResources(this);
 		}
 	}
 
 	public void gatherResources() {
 		if (hasCapacity()) {
-			if (target == null || !doesResourceExist(target)) {
-				for (Resource r : sortedResources) {
-					if (doesResourceExist(r) && !ResourceManager.getResourceGathererHashMap().getOrDefault(r, false)) {
-						ResourceManager.getResourceMap().put(r, this);
-						ResourceManager.getResourceGathererHashMap().put(r, true);
-						moveTo(r);
-						((Collector) getWeaponOne()).use(r);
-						target = r;
-						return;
-					}
+			Resource closestAvailable = getClosestAvailableResource();
+			if (closestAvailable != null && (target == null || shouldSwitchTarget(closestAvailable))) {
+				if (target != null) {
+					releaseResource(target);
 				}
-			} else {
+				target = closestAvailable;
+				ResourceManager.getResourceMap().put(target, this);
+				ResourceManager.getResourceGathererHashMap().put(target, true);
+			}
+			if (target != null) {
 				moveTo(target);
 				((Collector) getWeaponOne()).use(target);
 			}
 		}
 	}
 
+	private boolean shouldSwitchTarget(Resource newTarget) {
+		Gatherer assignedGatherer = ResourceManager.getResourceMap().get(newTarget);
+		if (assignedGatherer == null) {
+			return true;
+		}
+		double myDistance = getDistance(newTarget);
+		double otherDistance = assignedGatherer.getDistance(newTarget);
+		return myDistance < otherDistance;
+	}
 
+	private Resource getClosestAvailableResource() {
+		double minDistance = Double.MAX_VALUE;
+		Resource closest = null;
+		for (Resource r : objects.resource.ResourceManager.getResources()) {
+			if (doesResourceExist(r)) {
+				Gatherer assignedGatherer = ResourceManager.getResourceMap().get(r);
+				double distance = getDistance(r);
+				if (assignedGatherer == null || distance < assignedGatherer.getDistance(r)) {
+					if (distance < minDistance) {
+						minDistance = distance;
+						closest = r;
+					}
+				}
+			}
+		}
+		return closest;
+	}
 
+	private void releaseResource(Resource r) {
+		if (r != null) {
+			ResourceManager.getResourceGathererHashMap().put(r, false);
+			ResourceManager.getResourceMap().remove(r);
+		}
+	}
 
 
 	private boolean doesResourceExist(Resource r)
