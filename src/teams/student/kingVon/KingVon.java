@@ -16,12 +16,13 @@ import java.util.ArrayList;
 public class KingVon extends Player
 {
 	int timer;
+	private ArrayList<Tank> tanks = new ArrayList<>();
 
 	public void setup()
 	{		
-		setName("KingVon");
+		setName("King Von");
 		setTeamImage("src/teams/student/KingVon/teamLogo.png");
-		setTitle("KingVon Team");
+		setTitle("King Von Team");
 		timer = 0;
 
 		setColorPrimary(170, 170, 170);
@@ -38,11 +39,10 @@ public class KingVon extends Player
 	// 30,000 < timer < 40,000 	late middle
 	// 45,000 < timer			endgame
 
-	
-	public void strategy() 
+
+	public void strategy()
 	{
 		timer++;
-
 		float gathererPercent = getFleetValueUnitPercentage(Gatherer.class);
 		float minerPercent = getFleetValueUnitPercentage(Miner.class);
 		float flankerPercent = getFleetValueUnitPercentage(Flanker.class);
@@ -50,32 +50,37 @@ public class KingVon extends Player
 
 		if (timer < 15000)
 		{
-			if (getMyUnits(Fighter.class).size() < 2 )
+			if (gathererPercent < 0.4)
 			{
-				buildUnit(new Fighter(this));
-			}
-			else if (gathererPercent < 0.5)
-			{
-                Gatherer g = new Gatherer(this);
+				Gatherer g = new Gatherer(this);
+				ResourceManager.getGatherers().add(g);
 				buildUnit(g);
-                ResourceManager.getGatherers().add(g);
 			}
-			else if (minerPercent < 0.25)
+			else if (minerPercent < 0.4)
 			{
 				buildUnit(new Miner(this));
 			}
-			else if (flankerPercent < 0.15)
-			{
-				buildUnit(new Flanker(this));
-			}
 			else
 			{
-				buildUnit(new Fighter(this));
+				if (anyEnemyHasCollector())
+				{
+					buildUnit(new Flanker(this));
+				}
+				else
+				{
+					buildUnit(new Fighter(this));
+				}
+			}
+			if (getMyUnits(Fighter.class).size() <= 3 )
+			{
+				Tank t = new Tank(this);
+				tanks.add(t);
+				buildUnit(t);
 			}
 		}
 		else if (timer < 35000)
 		{
-			if (getMyUnits(Fighter.class).size() < 2 )
+			if (getMyUnits(Fighter.class).size() <= 2 )
 			{
 				buildUnit(new Fighter(this));
 			}
@@ -92,7 +97,7 @@ public class KingVon extends Player
 				buildUnit(new Fighter(this));
 			}
 		}
-		else if (timer > 45000)
+		else if (timer > 35000)
 		{
 			buildUnit(new Fighter(this));
 		}
@@ -112,9 +117,19 @@ public class KingVon extends Player
 
 	public void draw(Graphics g)
 	{
-
+		if (timer > 25000) {
+			addMessage("Timer > 25,000");
+		}
 	}
 
+
+	public int getTimer() {
+		return timer;
+	}
+
+	public ArrayList<Tank> getTanks() {
+		return tanks;
+	}
 
 
 

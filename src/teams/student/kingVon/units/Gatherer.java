@@ -54,6 +54,14 @@ public class Gatherer extends KingVonUnit
 
 	public void returnResources() {
 		if (isFull()) {
+			if (getPlayer().getTimer() > 25000) {
+				Resource r = getNearestResource();
+				if(r != null) {
+					moveTo(r);
+					((Collector) getWeaponOne()).use(r);
+				}
+				return;
+			}
 			if (target != null) {
 				ResourceManager.getResourceGathererHashMap().put(target, false);
 				target = null;
@@ -65,6 +73,14 @@ public class Gatherer extends KingVonUnit
 
 	public void gatherResources() {
 		if (hasCapacity()) {
+			if (getPlayer().getTimer() > 25000) {
+				Resource r = getNearestResource();
+				if(r != null) {
+					moveTo(r);
+					((Collector) getWeaponOne()).use(r);
+				}
+				return;
+			}
 			Resource closestAvailable = getClosestAvailableResource();
 			if (closestAvailable != null && (target == null || shouldSwitchTarget(closestAvailable))) {
 				if (target != null) {

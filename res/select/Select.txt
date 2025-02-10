@@ -1,4 +1,4 @@
 teams.student.kingVon.KingVon
-100
-teams.foes.dummy.Dummy
+130
+teams.foes.rock.TheRock
 100

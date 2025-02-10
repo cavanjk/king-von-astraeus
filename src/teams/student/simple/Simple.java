@@ -11,7 +11,7 @@ public class Simple extends Player
 	public void setup()
 	{		
 		setName("My Team");
-		setTeamImage("src/teams/student/myTeam/teamLogo.png");
+		setTeamImage("src/teams/student/simple/teamLogo.png");
 		setTitle("Newbie Team");
 
 		setColorPrimary(170, 170, 170);
