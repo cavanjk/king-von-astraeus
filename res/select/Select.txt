@@ -1,4 +1,4 @@
-teams.student.TsarBomba.TsarBomba
+teams.student.kingVon.KingVon
 100
-teams.mal.ares.Ares
+teams.foes.rock.TheRock
 100
